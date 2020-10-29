@@ -3,16 +3,24 @@ type: docker
 name: default
 
 steps:
+- name: decrypt - managing secret solution files
+  # cp. https://hub.docker.com/r/frapsoft/openssl
+  image: frapsoft/openssl
+  environment:
+    KEY:
+      from_secret: key
+  commands:
+    - openssl enc -d -aes-256-cbc -md sha256 -pass env:KEY -in ./${DRONE_BRANCH}/expected_result.txt.enc -out ./${DRONE_BRANCH}/expected_result.txt
 
-- name: check - final test step
+
+- name: check - check if main is correct
   image: ubuntu:18.04
   commands:
-  - echo ${DRONE_GIT_HTTP_URL}
-  - echo ${DRONE_BRANCH}
-  - pwd
-  - echo "--- Drone pipeline test successfully terminated ---"
+  - cd ${DRONE_BRANCH}
+  - cat expected_result.txt | sed -n 1,5p; echo
+  - cat mydata.txt | sed -n 1,5p; echo
+  - diff -q mydata.txt expected_result.txt
 
 trigger:
   branch:
-  - master
   - feature*
