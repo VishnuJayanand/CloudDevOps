@@ -3,7 +3,7 @@ setup:
   comment: VirtualBox helps you to host a virtual machine in your host operating system
   base-system: Windows 10 Pro
   sources:
-  - https://www.virtualbox.org/wiki/Downloads
+  - https://www.virtualbox.org/wiki/Downloads/
   actions:
   - Downloaded the VirtualBox Windows Host from the link
   - Clicked on the downloaded .exe installer
@@ -37,8 +37,7 @@ setup:
   comment: Bash is the default unix shell and command language for most linux distributions
   base-system: Ubuntu 18.04.5 LTS
   sources:
-  - https://releases.ubuntu.com/18.04/
-  - https://en.wikipedia.org/wiki/Bash_(Unix_shell)
+  - https://www.howtoinstall.me/ubuntu/18-04/bash/
   actions:
   - Started the Ubuntu VM and logged in with the credentials.
   - Tried downloading and updating to the latest version of bash using 'sudo apt install bash'
@@ -50,7 +49,7 @@ setup:
   comment: installation of git. Git is a version-control system for tracking changes in source code during software development.
   base-system: Ubuntu 18.04.5 LTS
   sources:
-  - https://releases.ubuntu.com/18.04/
+  - https://www.howtoinstall.me/ubuntu/18-04/git/
   actions:
   - Started the Ubuntu VM and logged in with the credentials.
   - Tried downloading and updating to the latest version of git using 'sudo apt install git'
