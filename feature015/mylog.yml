@@ -11,7 +11,7 @@
   version:
     action: 
     - Opened VirtualBox application
-    - Clicked on 'About VirtualBox' in Help Menu
+    - Clicked on About VirtualBox in Help Menu
     version: 6.1.16 r140961 (Qt5.6.2)    
 - name: Ubuntu Server
   comment: Installation of Ubuntu Server as a Virtual Machine on your host machine allows you to use Ubuntu OS
@@ -20,12 +20,12 @@
   - https://releases.ubuntu.com/18.04/
   actions:
   - Downloaded the Ubuntu server install image from the above link
-  - Created a new VM in VirtualBox by choosing 'New Option'
-  - Gave a VM name, chose the VM type, allocated size and clicked on 'Continue'
-  - Chose 'Create a virtual Hard disk now' and clicked on Create.
-  - Selected 'VirtualBox Disk Image' (VDI) and clicked on Continue.
+  - Created a new VM in VirtualBox by choosing New Option
+  - Gave a VM name, chose the VM type, allocated size and clicked on Continue
+  - Chose Create a virtual Hard disk now and clicked on Create.
+  - Selected VirtualBox Disk Image VDI and clicked on Continue.
   - Chose the folder location to save the VDI
-  - Selected VDI (VirtualBox Disk Image) and clicked on Continue.
+  - Selected VDI VirtualBox Disk Image and clicked on Continue.
   - Chose the downloaded Ubuntu Server iso file as the VM image and Started the VM
   - Installed Ubuntu with recommended settings and created an administrator user and specified credentials.
   - Restarted the VM after installation was complete.
@@ -39,7 +39,7 @@
   - https://www.howtoinstall.me/ubuntu/18-04/bash/
   actions:
   - Started the Ubuntu VM and logged in with the credentials.
-  - Tried downloading and updating to the latest version of bash using 'sudo apt install bash'
+  - Tried downloading and updating to the latest version of bash using sudo apt install bash
   - pre-installed bash was already up to date
   version:
     action: bash --version
@@ -51,7 +51,7 @@
   - https://www.howtoinstall.me/ubuntu/18-04/git/
   actions:
   - Started the Ubuntu VM and logged in with the credentials.
-  - Tried downloading and updating to the latest version of git using 'sudo apt install git'
+  - Tried downloading and updating to the latest version of git using sudo apt install git
   - pre-installed git was already up to date
   version:
     action: git --version
