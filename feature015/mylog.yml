@@ -1,3 +1,4 @@
+setup: 
 - name: Oracle VM VirtualBox
   comment: VirtualBox helps you to host a virtual machine in your host operating system
   base-system: Windows 10 Pro
