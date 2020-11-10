@@ -3,17 +3,17 @@ setup:
   comment: VirtualBox helps you to host a virtual machine in your host operating system
   base-system: Windows 10 Pro
   sources:
-  - https://www.virtualbox.org/wiki/Downloads/
+  - https://www.virtualbox.org/wiki/Downloads
   actions:
   - Downloaded the VirtualBox Windows Host from the link
-  - Clicked on the downloaded .exe installer
+  - Clicked on the downloaded installer
   - Used the recommended settings and installed using the downloaded installer
   - Launched the VirtualBox application to start working
   version:
     action: 
     - Opened VirtualBox application
-    - Clicked on About VirtualBox in Help Menu
-    version: 6.1.16 r140961  
+    - Clicked on in Help Menu
+    version: 6.1.16    
 - name: Ubuntu Server
   comment: Installation of Ubuntu Server as a Virtual Machine on your host machine allows you to use Ubuntu OS
   base-system: Oracle VM VirtualBox
@@ -22,14 +22,14 @@ setup:
   actions:
   - Downloaded the Ubuntu server install image from the above link
   - Created a new VM in VirtualBox by choosing New Option
-  - Gave a VM name, chose the VM type, allocated size and clicked on Continue
-  - Chose Create a virtual Hard disk now and clicked on Create.
-  - Selected VirtualBox Disk Image VDI and clicked on Continue.
+  - Gave a VM name chose the VM type allocated size and clicked on Continue
+  - Chose Create a virtual Hard disk now and clicked on Create
+  - Selected VirtualBox Disk Image VDI and clicked on Continue
   - Chose the folder location to save the VDI
-  - Selected VDI VirtualBox Disk Image and clicked on Continue.
+  - Selected VDI VirtualBox Disk Image and clicked on Continue
   - Chose the downloaded Ubuntu Server iso file as the VM image and Started the VM
-  - Installed Ubuntu with recommended settings and created an administrator user and specified credentials.
-  - Restarted the VM after installation was complete.
+  - Installed Ubuntu with recommended settings and created an administrator user and specified credentials
+  - Restarted the VM after installation was complete
   version:
     action: lsb_release -d
     version: Ubuntu 18.04.5 LTS    
@@ -37,19 +37,20 @@ setup:
   comment: Bash is the default unix shell and command language for most linux distributions
   base-system: Ubuntu 18.04.5 LTS
   sources:
-  - https://www.howtoinstall.me/ubuntu/18-04/bash/
+  - https://releases.ubuntu.com/18.04/
+  - https://en.wikipedia.org/wiki/Bash_(Unix_shell)
   actions:
   - Started the Ubuntu VM and logged in with the credentials.
   - Tried downloading and updating to the latest version of bash using sudo apt install bash
   - pre-installed bash was already up to date
   version:
     action: bash --version
-    version: GNU bash, version 4.4.20
+    version: 4.4.20
 - name: Git
   comment: installation of git. Git is a version-control system for tracking changes in source code during software development.
   base-system: Ubuntu 18.04.5 LTS
   sources:
-  - https://www.howtoinstall.me/ubuntu/18-04/git/
+  - https://releases.ubuntu.com/18.04/
   actions:
   - Started the Ubuntu VM and logged in with the credentials.
   - Tried downloading and updating to the latest version of git using sudo apt install git
