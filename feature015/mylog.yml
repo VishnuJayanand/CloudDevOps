@@ -3,16 +3,14 @@ setup:
   comment: VirtualBox helps you to host a virtual machine in your host operating system
   base-system: Windows 10 Pro
   sources:
-  - https://www.virtualbox.org/wiki/Downloads
+  - https://www.virtualbox.org/wiki/Downloads/
   actions:
   - Downloaded the VirtualBox Windows Host from the link
   - Clicked on the downloaded installer
   - Used the recommended settings and installed using the downloaded installer
   - Launched the VirtualBox application to start working
   version:
-    action: 
-    - Opened VirtualBox application
-    - Clicked on in Help Menu
+    action: Opened VirtualBox application and clicked about
     version: 6.1.16    
 - name: Ubuntu Server
   comment: Installation of Ubuntu Server as a Virtual Machine on your host machine allows you to use Ubuntu OS
