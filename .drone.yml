@@ -3,24 +3,41 @@ type: docker
 name: default
 
 steps:
+
 - name: decrypt - managing secret solution files
-  # cp. https://hub.docker.com/r/frapsoft/openssl
+#  # cp. https://hub.docker.com/r/frapsoft/openssl
   image: frapsoft/openssl
   environment:
     KEY:
       from_secret: key
   commands:
-    - openssl enc -d -aes-256-cbc -md sha256 -pass env:KEY -in ./${DRONE_BRANCH}/expected_result.txt.enc -out ./${DRONE_BRANCH}/expected_result.txt
+    - openssl enc -d -aes-256-cbc -md sha256 -pass env:KEY -in ./${DRONE_BRANCH}/src.tar.enc -out ./${DRONE_BRANCH}/src.tar
+    - tar -xvf ./${DRONE_BRANCH}/src.tar
+  
 
-
-- name: check - check if main is correct
-  image: ubuntu:18.04
+- name: build all docker images needed
+  image: docker
+  volumes:
+  - name: dockersock
+    path: /var/run/docker.sock
   commands:
-  - cd ${DRONE_BRANCH}
-  - cat expected_result.txt | sed -n 1,5p; echo
-  - cat mydata.txt | sed -n 1,5p; echo
-  - diff -q mydata.txt expected_result.txt
+  - docker --version && cd src
+  - docker build --quiet -t ${DRONE_BRANCH}.check -f Dockerfile.python.df .
 
+- name: check if YML file is correct
+  image: ${DRONE_BRANCH}.check
+  pull: never
+  commands:
+  - touch ${DRONE_BRANCH}/mylog.yml
+  - cp ${DRONE_BRANCH}/mylog.yml src
+  - cd src
+  - python check.py
+
+volumes:
+  - name: dockersock
+    host:
+      path: /var/run/docker.sock
+  
 trigger:
   branch:
   - feature*
