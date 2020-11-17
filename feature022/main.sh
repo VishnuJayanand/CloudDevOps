@@ -10,12 +10,7 @@ do
     if(( $count>= 98 && $count<=427 ))
     then
         sum=$(( ((10#$sum))+((10#$three))))
-     #echo $three
     fi
-    #echo $seven
-    #echo $seven >> op.txt
-    #digit="${seven:0:1}"
-    #echo $digit
 
 done < "${1:-/dev/stdin}"
 echo $sum
