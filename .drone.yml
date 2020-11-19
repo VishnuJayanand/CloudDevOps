@@ -5,24 +5,38 @@ name: default
 steps:
 
 - name: decrypt - managing secret solution files
-#  # cp. https://hub.docker.com/r/frapsoft/openssl
+  # cp. https://hub.docker.com/r/frapsoft/openssl
   image: frapsoft/openssl
   environment:
     KEY:
       from_secret: key
   commands:
-    - openssl enc -d -aes-256-cbc -md sha256 -pass env:KEY -in ./${DRONE_BRANCH}/solution.sh.enc -out ./${DRONE_BRANCH}/solution.sh
+  - openssl enc -d -aes-256-cbc -md sha256 -pass env:KEY -in ./${DRONE_BRANCH}/src.tar.enc -out ./${DRONE_BRANCH}/src.tar
+  - tar -xvf ./${DRONE_BRANCH}/src.tar
 
 
-- name: check - check if main.sh is correct
-  image: ubuntu:18.04
+- name: build all docker images needed
+  image: docker
+  volumes:
+  - name: dockersock
+    path: /var/run/docker.sock
   commands:
-  - cd ./${DRONE_BRANCH}
-  - chmod +x main.sh
-  - bash ./main.sh < input.txt > output.txt
-  - chmod +x ./solution.sh
-  - bash ./solution.sh > expected_result.txt
-  - diff -q output.txt expected_result.txt
+  - docker --version && cd src
+  - docker build --quiet -t ${DRONE_BRANCH}ubuntu -f Dockerfile.ubuntu.curl.nginx.df .
+
+- name: check - check if main is correct
+  image: ${DRONE_BRANCH}ubuntu
+  pull: never
+  commands:
+  - chmod +x ${DRONE_BRANCH}/main.sh
+  - chmod +x src/solution.sh
+  - bash ${DRONE_BRANCH}/main.sh
+  - bash src/solution.sh --check
+
+volumes:
+- name: dockersock
+  host:
+    path: /var/run/docker.sock
 
 trigger:
   branch:
