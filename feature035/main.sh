@@ -1,9 +1,8 @@
 #! /bin/bash
 
 # create static webpages
-touch /var/www/html/fpdvso.html
-cat > /var/www/html/fpdvso.html <<EOF
-<!DOCTYPE html>
+touch /var/www/html/fpdvso.html;
+echo '<!DOCTYPE html>
 <html lang="en">
 <head>
 <title>Page Title</title>
@@ -15,12 +14,10 @@ cat > /var/www/html/fpdvso.html <<EOF
 </p>
 
 </body>
-</html>
-EOF
+</html>' | tee -a /var/www/html/fpdvso.html;
 
-touch /var/www/html/lsjhkz.html
-cat > /var/www/html/lsjhkz.html <<EOF
-<!DOCTYPE html>
+touch /var/www/html/lsjhkz.html;
+echo '<!DOCTYPE html>
 <html lang="en">
 <head>
 <title>Page Title</title>
@@ -32,8 +29,7 @@ cat > /var/www/html/lsjhkz.html <<EOF
 </p>
 
 </body>
-</html>
-EOF
+</html>' | tee -a /var/www/html/lsjhkz.html;
 
 # 
 cat > /etc/nginx/sites-available/fpdvso <<EOF
