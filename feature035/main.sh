@@ -69,7 +69,7 @@ nginx -s reload;
 service nginx start;
 
 # adding domain name in hosts file
-#cat >> /etc/hosts <<EOF
-#127.0.0.1  fpdvso.ws.local
-#127.0.0.1  lsjhkz.ws.local
-#EOF
+cat >> /etc/hosts <<EOF
+127.0.0.1  fpdvso.ws.local
+127.0.0.1  lsjhkz.ws.local
+EOF
