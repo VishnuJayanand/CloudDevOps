@@ -44,7 +44,7 @@ echo 'server {
     location / {
                 try_files $uri $uri/ =404;
         }
-    }'
+    }' | tee -a /etc/nginx/sites-available/fpdvso;
 
 touch /etc/nginx/sites-available/lsjhkz;
 echo 'server {
@@ -58,7 +58,7 @@ echo 'server {
     location / {
                 try_files $uri $uri/ =404;
         }
-    }'
+    }' | tee -a /etc/nginx/sites-available/lsjhkz;
 
 # linking
 ln -s /etc/nginx/sites-available/fpdvso /etc/nginx/sites-enabled/;
