@@ -1,11 +1,8 @@
 #! /bin/bash
 
-# Creating directories for webpages
-mkdir -p /var/www/html/{fpdvso,lsjhkz}
-
 # create static webpages
-touch /var/www/html/fpdvso/index.html
-cat > /var/www/html/fpdvso/index.html <<EOF
+touch /var/www/html/fpdvso.html
+cat > /var/www/html/fpdvso.html <<EOF
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,8 +18,8 @@ cat > /var/www/html/fpdvso/index.html <<EOF
 </html>
 EOF
 
-touch /var/www/html/lsjhkz/index.html
-cat > /var/www/html/lsjhkz/index.html <<EOF
+touch /var/www/html/lsjhkz.html
+cat > /var/www/html/lsjhkz.html <<EOF
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,8 +42,8 @@ server {
     listen 81 default_server;
     listen [::]:81 default_server;
     root /var/www/html/fpdvso;
-    index index.html index.htm ;
-    #The server name
+    index fpdvso.html;
+
     server_name fpdvso.ws.local;
 
     location / {
@@ -59,9 +56,9 @@ cat > /etc/nginx/sites-available/lsjhkz <<EOF
 server {
     listen 82;
     listen [::]:82;
-    root /var/www/html/lsjhkz;
-    index index.html index.htm ;
-    #The server name
+    root /var/www/html;
+    index lsjhkz.html;
+
     server_name lsjhkz.ws.local;
 
     location / {
@@ -80,7 +77,7 @@ service nginx start;
 /etc/init.d/nginx restart;
 
 # adding domain name in hosts file
-cat >> /etc/hosts <<EOF
-127.0.0.1  fpdvso.ws.local
-127.0.0.1  lsjhkz.ws.local
-EOF
+#cat >> /etc/hosts <<EOF
+#127.0.0.1  fpdvso.ws.local
+#127.0.0.1  lsjhkz.ws.local
+#EOF
