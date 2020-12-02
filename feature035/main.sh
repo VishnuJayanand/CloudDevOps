@@ -71,12 +71,12 @@ server {
 EOF
 
 # linking
-ln -s /etc/nginx/sites-available/fpdvso.conf /etc/nginx/sites-enabled/
-ln -s /etc/nginx/sites-available/lsjhkz.conf /etc/nginx/sites-enabled/
+ln -s /etc/nginx/sites-available/fpdvso.conf /etc/nginx/sites-enabled/;
+ln -s /etc/nginx/sites-available/lsjhkz.conf /etc/nginx/sites-enabled/;
 
 # Nginx service restart
-#nginx -s reload
-/etc/init.d/nginx restart
+nginx -s reload;
+/etc/init.d/nginx restart;
 
 # adding domain name in hosts file
 #cat >> /etc/hosts <<EOF
