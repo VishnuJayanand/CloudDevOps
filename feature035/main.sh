@@ -67,7 +67,6 @@ ln -s /etc/nginx/sites-available/lsjhkz /etc/nginx/sites-enabled/;
 # Nginx service restart
 nginx -s reload;
 service nginx start;
-/etc/init.d/nginx restart;
 
 # adding domain name in hosts file
 #cat >> /etc/hosts <<EOF
