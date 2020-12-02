@@ -31,37 +31,34 @@ echo '<!DOCTYPE html>
 </body>
 </html>' | tee -a /var/www/html/lsjhkz.html;
 
-# 
-cat > /etc/nginx/sites-available/fpdvso <<EOF
-
-server {
+# creating config files
+touch /etc/nginx/sites-available/fpdvso;
+echo 'server {
     listen 81 default_server;
     listen [::]:81 default_server;
-    root /var/www/html/fpdvso;
+    root /var/www/public_html/fpdvso;
     index fpdvso.html;
-
+    #The server name
     server_name fpdvso.ws.local;
 
     location / {
                 try_files $uri $uri/ =404;
         }
-    }
-EOF
+    }'
 
-cat > /etc/nginx/sites-available/lsjhkz <<EOF
-server {
-    listen 82;
-    listen [::]:82;
-    root /var/www/html;
+touch /etc/nginx/sites-available/lsjhkz;
+echo 'server {
+    listen 82 default_server;
+    listen [::]:82 default_server;
+    root /var/www/public_html/lsjhkz;
     index lsjhkz.html;
-
+    #The server name
     server_name lsjhkz.ws.local;
 
     location / {
                 try_files $uri $uri/ =404;
         }
-    }
-EOF
+    }'
 
 # linking
 ln -s /etc/nginx/sites-available/fpdvso /etc/nginx/sites-enabled/;
