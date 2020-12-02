@@ -1,11 +1,11 @@
 #! /bin/bash
 
 # Creating directories for webpages
-mkdir -p /var/www/public_html/{fpdvso,lsjhkz}
+mkdir -p /var/www/html/{fpdvso,lsjhkz}
 
 # create static webpages
-touch /var/www/public_html/fpdvso/index.html
-cat > /var/www/public_html/fpdvso/index.html <<EOF
+touch /var/www/html/fpdvso/index.html
+cat > /var/www/html/fpdvso/index.html <<EOF
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,8 +21,8 @@ cat > /var/www/public_html/fpdvso/index.html <<EOF
 </html>
 EOF
 
-touch /var/www/public_html/lsjhkz/index.html
-cat > /var/www/public_html/lsjhkz/index.html <<EOF
+touch /var/www/html/lsjhkz/index.html
+cat > /var/www/html/lsjhkz/index.html <<EOF
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,7 +44,7 @@ cat > /etc/nginx/sites-available/fpdvso.conf <<EOF
 server {
     listen 81 default_server;
     listen [::]:81 default_server;
-    root /var/www/public_html/fpdvso;
+    root /var/www/html/fpdvso;
     index index.html index.htm ;
     #The server name
     server_name fpdvso.ws.local;
@@ -59,7 +59,7 @@ cat > /etc/nginx/sites-available/lsjhkz.conf <<EOF
 server {
     listen 82;
     listen [::]:82;
-    root /var/www/public_html/lsjhkz;
+    root /var/www/html/lsjhkz;
     index index.html index.htm ;
     #The server name
     server_name lsjhkz.ws.local;
