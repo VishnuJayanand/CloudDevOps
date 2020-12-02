@@ -34,8 +34,8 @@ echo '<!DOCTYPE html>
 # creating config files
 touch /etc/nginx/sites-available/fpdvso;
 echo 'server {
-    listen 81 default_server;
-    listen [::]:81 default_server;
+    listen 80;
+    listen [::]:80;
     root /var/www/public_html/fpdvso;
     index fpdvso.html;
     #The server name
@@ -48,8 +48,8 @@ echo 'server {
 
 touch /etc/nginx/sites-available/lsjhkz;
 echo 'server {
-    listen 82 default_server;
-    listen [::]:82 default_server;
+    listen 80;
+    listen [::]:80;
     root /var/www/public_html/lsjhkz;
     index lsjhkz.html;
     #The server name
@@ -70,7 +70,7 @@ service nginx start;
 /etc/init.d/nginx restart;
 
 # adding domain name in hosts file
-#cat >> /etc/hosts <<EOF
-#127.0.0.1  fpdvso.ws.local
-#127.0.0.1  lsjhkz.ws.local
-#EOF
+cat >> /etc/hosts <<EOF
+127.0.0.1  fpdvso.ws.local
+127.0.0.1  lsjhkz.ws.local
+EOF
