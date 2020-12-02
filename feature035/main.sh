@@ -39,7 +39,7 @@ cat > /var/www/html/lsjhkz/index.html <<EOF
 EOF
 
 # 
-cat > /etc/nginx/sites-available/fpdvso.conf <<EOF
+cat > /etc/nginx/sites-available/fpdvso <<EOF
 
 server {
     listen 81 default_server;
@@ -55,7 +55,7 @@ server {
     }
 EOF
 
-cat > /etc/nginx/sites-available/lsjhkz.conf <<EOF
+cat > /etc/nginx/sites-available/lsjhkz <<EOF
 server {
     listen 82;
     listen [::]:82;
