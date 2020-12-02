@@ -4,6 +4,7 @@
 mkdir -p /var/www/public_html/{fpdvso,lsjhkz}
 
 # create static webpages
+touch /var/www/public_html/fpdvso/index.html
 cat > /var/www/public_html/fpdvso/index.html <<EOF
 <!DOCTYPE html>
 <html lang="en">
@@ -20,6 +21,7 @@ cat > /var/www/public_html/fpdvso/index.html <<EOF
 </html>
 EOF
 
+touch /var/www/public_html/lsjhkz/index.html
 cat > /var/www/public_html/lsjhkz/index.html <<EOF
 <!DOCTYPE html>
 <html lang="en">
@@ -73,11 +75,11 @@ ln -s /etc/nginx/sites-available/fpdvso.conf /etc/nginx/sites-enabled/
 ln -s /etc/nginx/sites-available/lsjhkz.conf /etc/nginx/sites-enabled/
 
 # Nginx service restart
-nginx -s reload
+#nginx -s reload
 /etc/init.d/nginx restart
 
 # adding domain name in hosts file
-cat >> /etc/hosts <<EOF
-127.0.0.1  fpdvso.ws.local
-127.0.0.1  lsjhkz.ws.local
-EOF
+#cat >> /etc/hosts <<EOF
+#127.0.0.1  fpdvso.ws.local
+#127.0.0.1  lsjhkz.ws.local
+#EOF
