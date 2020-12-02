@@ -36,7 +36,7 @@ touch /etc/nginx/sites-available/fpdvso;
 echo 'server {
     listen 80;
     listen [::]:80;
-    root /var/www/html/fpdvso;
+    root /var/www/html;
     index fpdvso.html;
 
     server_name fpdvso.ws.local;
@@ -50,7 +50,7 @@ touch /etc/nginx/sites-available/lsjhkz;
 echo 'server {
     listen 80;
     listen [::]:80;
-    root /var/www/html/lsjhkz;
+    root /var/www/html;
     index lsjhkz.html;
 
     server_name lsjhkz.ws.local;
