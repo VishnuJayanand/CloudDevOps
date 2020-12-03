@@ -21,7 +21,7 @@ steps:
   - name: dockersock
     path: /var/run/docker.sock
   commands:
-  - docker --version && cd src
+  - docker --version && cd src 
   - docker build --quiet -t ${DRONE_BRANCH}ubuntu -f Dockerfile.ubuntu.curl.nginx.df .
 
 - name: check - check if main is correct
