@@ -3,7 +3,6 @@ type: docker
 name: default
 
 steps:
-
 - name: decrypt - managing secret solution files
   # cp. https://hub.docker.com/r/frapsoft/openssl
   image: frapsoft/openssl
@@ -11,32 +10,16 @@ steps:
     KEY:
       from_secret: key
   commands:
-  - openssl enc -d -aes-256-cbc -md sha256 -pass env:KEY -in ./${DRONE_BRANCH}/src.tar.enc -out ./${DRONE_BRANCH}/src.tar
-  - tar -xvf ./${DRONE_BRANCH}/src.tar
+  - openssl enc -d -aes-256-cbc -md sha256 -pass env:KEY -in ./${DRONE_BRANCH}/solution.py.enc -out ./${DRONE_BRANCH}/solution.py
 
 
-- name: build all docker images needed
-  image: docker
-  volumes:
-  - name: dockersock
-    path: /var/run/docker.sock
+- name: check if main is correct
+  image: python:3.8.3
   commands:
-  - docker --version && cd src 
-  - docker build --quiet -t ${DRONE_BRANCH}ubuntu -f Dockerfile.ubuntu.curl.nginx.df .
-
-- name: check - check if main is correct
-  image: ${DRONE_BRANCH}ubuntu
-  pull: never
-  commands:
-  - chmod +x ${DRONE_BRANCH}/main.sh
-  - chmod +x src/solution.sh
-  - bash ${DRONE_BRANCH}/main.sh
-  - bash src/solution.sh --check
-
-volumes:
-- name: dockersock
-  host:
-    path: /var/run/docker.sock
+  - cd ${DRONE_BRANCH}
+  - python solution.py > expected_result.txt
+  - python main.py > output.txt
+  - diff -q output.txt expected_result.txt
 
 trigger:
   branch:
