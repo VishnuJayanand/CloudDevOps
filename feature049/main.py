@@ -12,7 +12,3 @@ connection = fabric.Connection(host=host, port=22, user=username, connect_kwargs
 
 print("connection succeeded")
 final_key = "ssh-rsa " + open('public_key.pub').read()
-
-#Copy public key to folder
-
-serverConn = Connection(host="server.local", user="admin")
