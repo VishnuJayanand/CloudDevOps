@@ -1,5 +1,5 @@
 #Import Necessary Libraries
-import paramiko
+#import paramiko
 import fabric
 import invoke
 
@@ -8,9 +8,11 @@ port = 22
 username = "admin"
 password = "admin"
 
-ssh_client = paramiko.SSHClient()
-ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-ssh_client.connect(hostname=host,port = port, username = username, password = password)
+connection = fabric.Connection(host=host, port=22, user=username, connect_kwargs={'password': password})
 
-
+print("connection succeeded")
 final_key = "ssh-rsa " + open('public_key.pub').read()
+
+#Copy public key to folder
+
+serverConn = Connection(host="server.local", user="admin")
