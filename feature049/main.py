@@ -13,3 +13,4 @@ ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 ssh_client.connect(hostname=host,port = port, username = username, password = password)
 
 
+final_key = "ssh-rsa " + open('public_key.pub').read()
