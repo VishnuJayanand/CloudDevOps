@@ -1,7 +1,7 @@
 #Import Necessary Libraries
 #import paramiko
 import fabric
-import invoke
+from invoke import Responder
 
 host = "server.local"
 port = 22
