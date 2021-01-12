@@ -15,7 +15,8 @@ connection = fabric.Connection(host=host, port=22, user=username, connect_kwargs
 final_key = "ssh-rsa " + open('public_key.pub').read()
 connection.run('mkdir -p ~/.ssh/')
 connection.run('echo "%s" > ~/.ssh/authorized_keys' % final_key)
-#connection.run('cat ~/.ssh/authorized_keys')
 
 
-
+#allow necessary permissions
+connection.run('chmod 600 ~/.ssh/*')
+connection.run('chmod 700 ~/.ssh/')
