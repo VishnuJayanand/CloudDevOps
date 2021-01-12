@@ -28,3 +28,8 @@ conn = fabric.Connection(host=host, port=22, user=username, connect_kwargs={'pas
 passwrd = Responder(pattern = r'\[sudo\] password:', response = 'admin\n')
 conn.run('echo "admin ALL=(ALL) NOPASSWD: ALL" | sudo EDITOR="tee -a" visudo', pty = True, watchers=[passwrd])
 conn.run('sudo service sshd reload')
+
+#remove password authentication
+conn.run('sudo sed -i "s/#PasswordAuthentication yes/PasswordAuthentication no/g" /etc/ssh/sshd_config')
+conn.run('sudo service ssh restart')
+conn.close()
