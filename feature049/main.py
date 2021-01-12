@@ -1,7 +1,7 @@
 #Import Necessary Libraries
 #import paramiko
 import fabric
-from invoke import Responder
+import Responder
 
 host = "server.local"
 port = 22
@@ -20,8 +20,10 @@ connection.run('echo "%s" > ~/.ssh/authorized_keys' % final_key)
 #allow necessary permissions
 connection.run('chmod 600 ~/.ssh/*')
 connection.run('chmod 700 ~/.ssh/')
+connection.close()
 
 #passwordless sudo
 #connection.run('echo "admin ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers')
+conn = fabric.Connection(host=host, port=22, user=username, connect_kwargs={'password': password})
 passwrd = Responder(pattern = r'\[sudo\] password:', response = 'admin\n')
-connection.run('echo "admin ALL=(ALL) NOPASSWD: ALL" | sudo EDITOR="tee -a" visudo', pty = True, watchers=[passwrd])
+conn.run('echo "admin ALL=(ALL) NOPASSWD: ALL" | sudo EDITOR="tee -a" visudo', pty = True, watchers=[passwrd])
