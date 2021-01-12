@@ -20,16 +20,13 @@ connection.run('echo "%s" > ~/.ssh/authorized_keys' % final_key)
 #allow necessary permissions
 connection.run('chmod 600 ~/.ssh/*')
 connection.run('chmod 700 ~/.ssh/')
-connection.close()
 
 #passwordless sudo
 #connection.run('echo "admin ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers')
-conn = fabric.Connection(host=host, port=22, user=username, connect_kwargs={'password': password})
 sudopassword = Responder(pattern = r'\[sudo\] password:', response = 'admin\n')
-conn.run('echo "admin ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers', pty = True, watchers=[sudopassword])
-conn.run('sudo service sshd reload')
+connection.run('echo "admin ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers', pty = True, watchers=[sudopassword])
 
 #remove password authentication
-conn.run('sudo sed -i "s/#PasswordAuthentication yes/PasswordAuthentication no/g" /etc/ssh/sshd_config')
-conn.run('sudo service ssh restart')
-conn.close()
+connection.run('sudo sed -i "s/#PasswordAuthentication yes/PasswordAuthentication no/g" /etc/ssh/sshd_config')
+connection.run('sudo service ssh restart')
+connection.close()
