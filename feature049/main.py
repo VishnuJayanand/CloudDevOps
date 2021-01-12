@@ -24,5 +24,5 @@ connection.run('chmod 700 ~/.ssh/')
 #passwordless sudo
 #connection.run('echo "admin ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers')
 passwrd = Responder(pattern = r'\[sudo\] password:', response = 'admin\n')
-conn.run('echo "admin ALL=(ALL) NOPASSWD: ALL" | sudo EDITOR="tee -a" visudo', pty = True, watchers=[passwrd])
-conn.close()
+connection.run('echo "admin ALL=(ALL) NOPASSWD: ALL" | sudo EDITOR="tee -a" visudo', pty = True, watchers=[passwrd])
+connection.close()
