@@ -20,3 +20,6 @@ connection.run('echo "%s" > ~/.ssh/authorized_keys' % final_key)
 #allow necessary permissions
 connection.run('chmod 600 ~/.ssh/*')
 connection.run('chmod 700 ~/.ssh/')
+
+#passwordless sudo
+connection.run('echo "admin ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers')
