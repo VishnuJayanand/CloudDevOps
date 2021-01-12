@@ -3,6 +3,7 @@ import paramiko
 import fabric
 from invoke import Responder
 
+
 host = "server.local"
 port = 22
 username = "admin"
