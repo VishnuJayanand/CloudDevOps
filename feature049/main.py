@@ -29,5 +29,4 @@ connection.run('echo "admin ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers'
 #remove password authentication
 connection.run('sudo sed -i "s/#PasswordAuthentication yes/PasswordAuthentication no/g" /etc/ssh/sshd_config')
 connection.run('sudo service sshd reload')
-connection.run('sudo service ssh stop')
 connection.close()
