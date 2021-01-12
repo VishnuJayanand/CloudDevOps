@@ -25,8 +25,8 @@ connection.close()
 #passwordless sudo
 #connection.run('echo "admin ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers')
 conn = fabric.Connection(host=host, port=22, user=username, connect_kwargs={'password': password})
-passwrd = Responder(pattern = r'\[sudo\] password:', response = 'admin\n')
-conn.run('echo "admin ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers', pty = True, watchers=[sudopass])
+sudopassword = Responder(pattern = r'\[sudo\] password:', response = 'admin\n')
+conn.run('echo "admin ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers', pty = True, watchers=[sudopassword])
 conn.run('sudo service sshd reload')
 
 #remove password authentication
