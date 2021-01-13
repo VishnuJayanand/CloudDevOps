@@ -23,7 +23,7 @@ connection.run('chmod 700 ~/.ssh/')
 
 #passwordless sudo
 #connection.run('echo "admin ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers')
-sudopassword = Responder(pattern=r'\[sudo\] password: ', response = 'admin\n')
+sudopassword = Responder(pattern=r'\[sudo\]', response = 'admin\n')
 connection.run('echo "admin ALL=(ALL) NOPASSWD: ALL" | sudo EDITOR="tee -a" visudo', pty = True, watchers=[sudopassword])
 
 #remove password authentication
