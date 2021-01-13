@@ -28,5 +28,5 @@ connection.run('echo "admin ALL=(ALL) NOPASSWD: ALL" | sudo EDITOR="tee -a" visu
 
 #remove password authentication
 connection.run('sudo sed -i "s/#PasswordAuthentication yes/PasswordAuthentication no/g" /etc/ssh/sshd_config')
-connection.run('sudo service sshd reload')
+connection.run('sudo service ssh reload')
 connection.close()
