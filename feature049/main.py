@@ -3,7 +3,6 @@
 import fabric
 from invoke import Responder
 
-
 host = "server.local"
 port = 22
 username = "admin"
@@ -25,7 +24,7 @@ connection.run('chmod 700 ~/.ssh/')
 #passwordless sudo
 #connection.run('echo "admin ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers')
 sudopassword = Responder(pattern=r'\[sudo\] password: ', response = 'admin\n')
-connection.run('echo "admin ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers', pty = True, watchers=[sudopassword])
+connection.run('echo "admin ALL=(ALL) NOPASSWD: ALL" | sudo EDITOR="tee -a" visudo', pty = True, watchers=[sudopassword])
 
 #remove password authentication
 connection.run('sudo sed -i "s/#PasswordAuthentication yes/PasswordAuthentication no/g" /etc/ssh/sshd_config')
