@@ -21,39 +21,30 @@ steps:
     path: /var/run/docker.sock
   commands:
   - docker --version && cd ${DRONE_BRANCH}
-  - docker build --quiet -t ${DRONE_BRANCH}python.main -f ../src/Dockerfile.python.df .
+  - docker build --quiet -t ${DRONE_BRANCH}.main -f Dockerfile.main.df .
   - docker --version && cd ../src
   - docker build --quiet -t ${DRONE_BRANCH}python.solution -f Dockerfile.python.df .
-  - docker build --quiet -t ${DRONE_BRANCH}ubuntu.sshd -f Dockerfile.ubuntu.sshd.df .
 
 - name: server.local
-  image: ${DRONE_BRANCH}ubuntu.sshd
+  image: ${DRONE_BRANCH}.main
   pull: never
   detach: true
   commands:
-  - service ssh start
+  - nginx
+  - ps -ax
+#  - nginx -g "daemon off;error_log /dev/stdout debug;"
     # Note: The ssh daemon needs to be started manually since Drone seems to
     #       start containers as if with '-it' and '/bin/bash' command was used
-  - /bin/bash -c 'while true ; do who -a ; echo "$(service ssh status) on $(hostname -I)" ; sleep 1 ; done'
+  - /bin/bash -c 'while true ; do echo "$(service nginx status) on $(hostname -I)" ; sleep 1 ; done'
     # Note: The '-c' option is needed for bash to interpret the passed
     #       arguments as bash commands.
-
-- name: run main and generate result
-  image: ${DRONE_BRANCH}python.main
-  pull: never
-  commands:
-  - cd ${DRONE_BRANCH}
-  - python main.py
 
 - name: check if main worked as expected
   image: ${DRONE_BRANCH}python.solution
   pull: never
   commands:
   - cd src
-  - cp ../${DRONE_BRANCH}/private_key.pem .
-    # Note: To be able to access the private key it has to
-    # be copied to this folder
-  - python solution.py --check
+  - python check.py
 
 volumes:
 - name: dockersock
