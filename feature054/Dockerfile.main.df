@@ -1,3 +1,5 @@
 FROM ubuntu:18.04
 RUN apt-get update && apt-get install -y nginx
 RUN apt-get update && apt-get install openssh-server
+RUN service ssh start
+EXPOSE 22
