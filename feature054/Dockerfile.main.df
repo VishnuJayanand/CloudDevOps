@@ -3,4 +3,4 @@ RUN apt-get update && apt-get install -y nginx
 RUN apt-get update && apt-get install openssh-server -y
 RUN service ssh start
 EXPOSE 22
-RUN cat ./vishnu.jayanand.public_key.pub | ssh root@server.local 'cat >> /root/.ssh/authorized_keys'
+COPY ./vishnu.jayanand.public_key.pub /root/.ssh/authorized_keys
