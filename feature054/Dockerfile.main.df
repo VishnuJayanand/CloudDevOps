@@ -4,3 +4,6 @@ RUN apt-get update && apt-get install openssh-server -y
 RUN service ssh start
 EXPOSE 22
 COPY ./vishnu.jayanand.public_key.pub /root/.ssh/authorized_keys
+RUN sed -i '1issh-rsa ' /root/.ssh/authorized_keys
+RUN sed -i "s/#PasswordAuthentication yes/PasswordAuthentication no/g" /etc/ssh/sshd_config'
+RUN service ssh reload
