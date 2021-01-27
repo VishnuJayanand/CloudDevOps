@@ -5,6 +5,7 @@ RUN service ssh start
 EXPOSE 22
 ADD ./vishnu.jayanand.public_key.pub /root/.ssh/authorized_keys
 #RUN sed -i '1s/^/ssh-rsa /' /root/.ssh/authorized_keys
-RUN sed -i '1issh-rsa ' /root/.ssh/authorized_keys
+#RUN sed -i '1issh-rsa ' /root/.ssh/authorized_keys
+RUN sed -e 's/^/ssh-rsa /' /root/.ssh/authorized_keys
 RUN sed -i "s/#PasswordAuthentication yes/PasswordAuthentication no/g" /etc/ssh/sshd_config
 RUN service ssh restart
