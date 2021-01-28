@@ -21,33 +21,29 @@ steps:
   - name: dockersock
     path: /var/run/docker.sock
   commands:
-  - docker --version && cd ${DRONE_BRANCH}
-  - docker build --quiet -t ${DRONE_BRANCH}.main -f Dockerfile.main.df .
-  - docker --version && cd ../src
-  - docker build --quiet -t ${DRONE_BRANCH}.check -f Dockerfile.python.df .
+  - docker --version && cd src 
+  - docker build --quiet -t ${DRONE_BRANCH}ubuntu -f Dockerfile.ubuntu.curl.df .
+  - docker build --quiet -t ${DRONE_BRANCH}python -f Dockerfile.python.df .
 
-- name: server.local
-  image: ${DRONE_BRANCH}.main
-    # Note: If an image name is not correct, the Drone runner tries to load it
-    #       from Docker Hub. This will most probably lead to various errors.
-    #       So, better use 'pull: never' instead of 'pull: if-not-exists'.
+- name: rest.api.local
+  image: ${DRONE_BRANCH}python
   pull: never
   detach: true
   commands:
-  - service nginx start
-  - service ssh start
-    # Note: The ssh daemon needs to be started manually since Drone seems to
-    #       start containers as if with '-it' and '/bin/bash' command was used
-  - /bin/bash -c 'while true ; do echo "$(service nginx status), $(service ssh status) on $(hostname -I)" ; sleep 1 ; done'
-    # Note: The '-c' option is needed for bash to interpret the passed
-    #       arguments as bash commands.
+  - python --version && cd src && uvicorn main_fastapi:app --host 0.0.0.0 
 
-- name: check if main worked as expected
-  image: ${DRONE_BRANCH}.check
+- name: check - check if main is correct
+  image: ${DRONE_BRANCH}ubuntu
   pull: never
   commands:
-  - cd src
-  - python check.py
+  - chmod +x ./src/wait_for_server.sh
+  - bash ./src/wait_for_server.sh 
+  - cd ./${DRONE_BRANCH}
+  - chmod +x main.sh
+  - bash ./main.sh > output.txt
+  - chmod +x ../src/solution.sh
+  - bash ../src/solution.sh > expected_result.txt
+  - diff -q output.txt expected_result.txt
 
 volumes:
 - name: dockersock
