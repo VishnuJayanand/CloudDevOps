@@ -7,7 +7,7 @@ token=$(curl -X GET "http://rest.api.local:8000/token/vishnu.jayanand" -H  "Acce
 #add-apt-repository ppa:eugenesan/ppa -y
 #apt-get install jq -y
 
-echo "$token" | grep -oP '(?<="token": ")[^"]*'
+token=$(echo "$token" | grep -oP '(?<="token": ")[^"]*')
 
 curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST \ -d
 '{
