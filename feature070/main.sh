@@ -9,7 +9,7 @@ token=$(curl -X GET "http://rest.api.local:8000/token/vishnu.jayanand" -H  "Acce
 
 token=$(echo "$token" | grep -oP '(?<="token": ")[^"]*')
 
-curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d
+curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d \
 '{
   "key1": "hpdfjpdvnrsazsnzwojsyvqpsrgbseyt",
   "key2": "hbzkquxe",
