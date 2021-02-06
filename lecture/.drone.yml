@@ -1,0 +1,18 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+
+- name: check - final test step
+  image: ubuntu:18.04
+  commands:
+  - echo ${DRONE_GIT_HTTP_URL}
+  - echo ${DRONE_BRANCH}
+  - pwd
+  - echo "--- Drone pipeline test successfully terminated ---"
+
+trigger:
+  branch:
+  - master
+  - feature*
